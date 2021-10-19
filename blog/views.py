@@ -11,8 +11,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 
 # Act like JSON-python library dictionaruy
-
-
 def home(request):
     context = {
         'posts': Post.objects.all()
