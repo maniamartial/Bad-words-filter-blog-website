@@ -10,6 +10,7 @@ urlpatterns = [
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post_update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('user/<str:username>', UserPostListView.as_view(), name='user-post'),
+    path('post/<int:pk>/comment/', views.add_comment, name='add_comment'),
 ]
 '''<a class = "btn btn-outline-info mb-4" href = "?page=1" > First < /a >
 <a class = "btn btn-outline-info mb-4" href = "?page = {{ page_obj.next_page_number }}" > Previous < /a >

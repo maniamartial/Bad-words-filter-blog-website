@@ -1,4 +1,7 @@
-from django.shortcuts import get_object_or_404, render
+from email import message
+from pyexpat.errors import messages
+from xml.etree.ElementTree import Comment
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.views.generic.edit import DeleteView, UpdateView
 from .models import Post
@@ -6,6 +9,7 @@ from django.contrib.auth.models import User
 # We want to create delete, update views
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -81,6 +85,21 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+
+# allow people to comment
+
+
+@login_required
+def add_comment(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        user = User.objects.get(id=request.POST.get('user_id'))
+        text = request.POST.get('text')
+        Comment(author=user, post=post, text=text).save()
+        messages.success(request, "Your comment has been added successfully.")
+    else:
+        return redirect('post_detail', pk=pk)
+    return redirect('post_detail', pk=pk)
 
 
 def aboout(request):
