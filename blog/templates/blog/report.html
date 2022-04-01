@@ -1,0 +1,83 @@
+{%extends 'blog/base.html' %} {%block content%}
+
+<div class="container pt-2" style="background-color: #fbfbf9">
+  <div class="row row-cols-1 row-cols-md-2 gy-3">
+    <div class="col">
+      <div class="card">
+        <div class="row g-0">
+          <div class="col-6">
+            <img
+              src="https://hujiao24.com/images/interpretor.jpg"
+              class="img-fluid d-flex mx-auto h-100"
+            />
+          </div>
+          <div>{{ sensitive_words }}</div>
+          <div class="col-6">
+            <div
+              class="card-body bg-light pb-0"
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+              "
+            >
+              <h5>Title A</h5>
+              <p>
+                Country (also called country and western) is a genre of popular
+                music that originated with blues, church music such as Southern
+                gospel and spirituals, old-time, and American folk music forms
+                including
+              </p>
+              <a
+                class="btn btn-warning btn-sm w-75 w-md-50 d-block mx-auto my-1"
+                href="order_eng"
+                role="button"
+                >Click me</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <div class="row g-0">
+          <div class="col-6">
+            <img
+              src="https://hujiao24.com/images/translation.jpg"
+              class="img-fluid d-flex mx-auto h-100"
+            />
+          </div>
+          <div class="col-6">
+            <div
+              class="card-body bg-light pb-0"
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+              "
+            >
+              <h5>Title B</h5>
+              <p>
+                Country (also called country and western) is a genre of popular
+                music that originated with blues, church music such as Southern
+                gospel and spirituals, old-time, and American folk music forms
+                including
+              </p>
+              <a
+                class="btn btn-warning btn-sm w-75 w-md-50 d-block mx-auto my-1"
+                href="order_email"
+                role="button"
+                >Click me</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock content %}

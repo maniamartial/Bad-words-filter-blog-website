@@ -4,12 +4,14 @@ from xml.etree.ElementTree import Comment
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.views.generic.edit import DeleteView, UpdateView
+from matplotlib.style import context
 from .models import Post
 from django.contrib.auth.models import User
 # We want to create delete, update views
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 # Create your views here.
@@ -104,3 +106,14 @@ def add_comment(request, pk):
 
 def aboout(request):
     return render(request, "blog/about.html", {'title': 'About'})
+
+
+@login_required
+@staff_member_required
+def reportCase(request):
+    with open("badwords.txt") as f:
+        sensitive_words = f.readlines()
+        sensitive_words = sensitive_words.split('')
+        # print(sensitive_words)
+    context = {sensitive_words: "sensitive_words"}
+    return render(request, "blog/report.html", context)
