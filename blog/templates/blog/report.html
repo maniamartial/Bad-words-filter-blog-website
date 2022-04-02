@@ -11,7 +11,7 @@
               class="img-fluid d-flex mx-auto h-100"
             />
           </div>
-          <div>{{ sensitive_words }}</div>
+
           <div class="col-6">
             <div
               class="card-body bg-light pb-0"
@@ -79,5 +79,9 @@
       </div>
     </div>
   </div>
+  <div class="danger">Reporting words</div>
+  {% for word in sensitive_words %}
+  <p style="background: red">{{ word }}</p>
+  {% endfor %}
 </div>
 {%endblock content %}

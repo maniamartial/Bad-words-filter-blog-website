@@ -1,10 +1,11 @@
 from email import message
 from pyexpat.errors import messages
-from xml.etree.ElementTree import Comment
+from .models import Comment
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.views.generic.edit import DeleteView, UpdateView
 from matplotlib.style import context
+from django.contrib import messages
 from .models import Post
 from django.contrib.auth.models import User
 # We want to create delete, update views
@@ -49,7 +50,7 @@ class UserPostListView(ListView):
 class PostDetailedView(DetailView):
     model = Post
 
-# CReating a new blog
+# Creating a new blog
 
 # We cannot use decoraters with classes
 
@@ -111,9 +112,29 @@ def aboout(request):
 @login_required
 @staff_member_required
 def reportCase(request):
-    with open("badwords.txt") as f:
-        sensitive_words = f.readlines()
-        sensitive_words = sensitive_words.split('')
-        # print(sensitive_words)
+    words = ["fuck", "Fuck off", "Piss off", "bugger off", "Bloody hell", "bastard", "Bollocks",
+             "fuck", "shit", "cock", "titties", "boner", "muff", "pussy", "asshole", "cunt", "social", "status"]
+    for sensitive_words in words:
+
+        db_title = Post.objects.values('title')
+        db_content = Post.objects.values('content')
+       # print(db_title)
+        # print(db_content)
+        if sensitive_words in db_content:
+            print("Error occurred")
+        else:
+            print("You are good")
+
     context = {sensitive_words: "sensitive_words"}
     return render(request, "blog/report.html", context)
+
+
+''''@login_required
+@staff_member_required
+def reportCase(request):
+    with open("badwords.txt") as f:
+        sensitive_words = f.readlines()
+
+        # print(sensitive_words)
+    context = {sensitive_words: "sensitive_words"}
+    return render(request, "blog/report.html", context)'''
