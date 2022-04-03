@@ -81,7 +81,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    success_url = '/ '
+    success_url = '/'
 
     def test_func(self):
         post = self.get_object()
@@ -120,6 +120,7 @@ def reportCase(request):
         db_content = Post.objects.values('content')
        # print(db_title)
         # print(db_content)
+
         if sensitive_words in db_content:
             print("Error occurred")
         else:

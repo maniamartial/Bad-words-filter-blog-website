@@ -1,4 +1,21 @@
-{%extends 'blog/base.html' %} {%block content%} {% for post in posts%}
+{%extends 'blog/base.html' %} {%block content%}
+<form class="form-inline my-2 my-lg-0 pb-2">
+  <input
+    class="form-control mr-sm-2"
+    name="q"
+    type="search"
+    placeholder="Search Username"
+    aria-label="Search"
+    style="width: 400px"
+  />
+  <input
+    class="btn btn-outline-success my-2 my-sm-0"
+    type="submit"
+    value="Search"
+  />
+</form>
+{% for post in posts%}
+<!-- Search Form -->
 
 <article class="media content-section">
   <img
@@ -17,7 +34,7 @@
         >{{ post.title }}</a
       >
     </h2>
-    <p class="article-content">{{ post.content |truncatewords:100 }}</p>
+    <p class="article-content">{{ post.content |truncatewords:50 }}</p>
   </div>
 </article>
 

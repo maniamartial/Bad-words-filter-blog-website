@@ -50,7 +50,7 @@
   <hr />
 
   <!--Lets liket the post on Image-->
-  <!-- Like -->
+
   {% if user.is_authenticated %}
   <div class="text-center">
     <a
@@ -60,7 +60,7 @@
       data-url="{% url 'like_api' object.pk %}"
       ><i
         style="color: red"
-        class="like-icon {% if user in object.liked.all %} fas fa-heart fa-2x {% else %} far fa-heart fa-2x {% endif %}"
+        class="like-icon {% if user in object.liked.all %} fas fa-heart fa-3x {% else %} far fa-heart fa-3x {% endif %}"
         id="like-icon"
       ></i
     ></a>
