@@ -118,6 +118,8 @@ def reportCase(request):
 
         db_title = Post.objects.values('title')
         db_content = Post.objects.values('content')
+        import pdb
+        pdb.set_trace()
        # print(db_title)
         # print(db_content)
 
