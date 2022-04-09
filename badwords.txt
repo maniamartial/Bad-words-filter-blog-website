@@ -1,5 +1,3 @@
-[("fuck","Fuck off", "Piss off", "bugger off", "Bloody hell", "bastard","Bollocks","fuck", "shit", "cock", "titties", "boner", "muff", "pussy", "asshole", "cunt",
-"ass", "cockfoam", "nigger","Motherfucker", "Piece of shit","Wanker", "Fucking","Dork", "Cunt","Fuckface","Scumbag","Bitch","blackman","
-blackpeople","insane","stupid","illitarate","prostitute",gay","lesbian","pagan","evil","atheist","foolish","promiscous","jackas","jerk","dunder","dick",
-"idiot","rapist","killer","murderer","criminal","snitch","smoker","badpeer","cocksucker","tits","piss","wank","bugger","arse","hole","head","crap",
-"bloody","arsehole","asshole","bullshit","feck","balls","bastard","dickhead","fanny","knob","twat","snatch","bomboclat","bloodclat","prick","clit")]
+['Fuck off', 'Piss off', "fuck", "penisfucker", "porn", "pussy", "pono", "ponography",
+"orgasm", "cocksuck", "cock", "damn", "erection", "douch", "fuckhole", "asshole",
+"blcak cock", "arse", "anal", "assfucker", "bloodyhell", "fuckass", "gook", "blood hel", "boong", "coon", "dick", "nigga", "sex", "bitch", "soon of bitch", "suck", "viagra", "nigro", ]
