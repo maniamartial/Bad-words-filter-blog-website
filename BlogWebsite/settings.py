@@ -134,10 +134,12 @@ MEDIA_URL = ' /media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_URL = 'login'
 
+# Authentication
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'blog-home'
 
+# allow the user to change or get password if they forgot
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

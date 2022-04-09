@@ -13,11 +13,14 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+#from profanity_filter import ProfanityFilter
 
 
 # Create your views here.
 
-# Act like JSON-python library dictionaruy
+# Act like JSON-python library dictionary
+
+
 def home(request):
     context = {
         'posts': Post.objects.all()
@@ -112,16 +115,15 @@ def aboout(request):
 @login_required
 @staff_member_required
 def reportCase(request):
-    words = ["fuck", "Fuck off", "Piss off", "bugger off", "Bloody hell", "bastard", "Bollocks",
+    words = ["Umbwa", "Fuck off", "Piss off", "bugger off", "Bloody hell", "bastard", "Bollocks",
              "fuck", "shit", "cock", "titties", "boner", "muff", "pussy", "asshole", "cunt", "social", "status"]
     for sensitive_words in words:
 
         db_title = Post.objects.values('title')
         db_content = Post.objects.values('content')
-        import pdb
-        pdb.set_trace()
-       # print(db_title)
-        # print(db_content)
+
+        #print(predict(['fuck you']))
+# Word(uncensored='fuck', censored='****', original_profane_word='fuck')
 
         if sensitive_words in db_content:
             print("Error occurred")
