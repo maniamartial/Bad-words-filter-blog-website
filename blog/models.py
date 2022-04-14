@@ -1,4 +1,3 @@
-from operator import contains
 import re
 from django.db import models
 
@@ -15,21 +14,26 @@ from django.conf import settings
 
 CENSORED_WORDS = ['Fuck off', 'Piss off', "fuck", "penisfucker", "porn", "pussy", "pono", "ponography",
                   "orgasm", "cocksuck", "cock", "damn", "erection", "douch", "fuckhole", "asshole",
-                  "blcak cock", "arse", "anal", "assfucker", "bloodyhell", "fuckass", "gook", "blood hel", "boong", "coon", "dick", "nigga", "sex", "bitch", "son of bitch", "suck", "viagra", "nigro", ]
+                  "black cock", "arse", "anal", "assfucker", "bloodyhell", "fuckass", "gook", "blood hel", "boong", "coon", "dick", "nigga", "sex", "bitch", "son of bitch",
+                  "suck", "viagra", "nigro", "hell", "motherfucker", " shit", "bitch", " black man", " black people", " insane", "stupid",
+                  " illitarate", " prostitute", "gay", " lesbian", "pagan", "evil", "atheist", " foolish", "promiscous", "jackas", "jerk", "dunder", "dick pussy",
+                  "motherfucker", "idiot", "rapist", "killer", "murderer", "criminal", "snitch", "smoker", "bad peer", "cocksucker", "tits", "cock", "piss", "cunt",
+                  "wank", "bugger", "arse", "hole", "head", "crap", "bloody arsehole", "asshole", "bullshit",
+                  "balls", "bastard", "dickhead", " fanny", "knob",
+                  "twat", "snatch", "bomboclat", "bloodcaat", "prick", "clit"]
 
 
 def validate_comment_text(text):
     words = set(re.sub("[^\w]", " ",  text).split())
     for censored_word in CENSORED_WORDS:
-        # print(words)
-        # print(censored_word)
-      #  if any(str(censored_word in words)):
+      # if any(str(censored_word in words)):
         if censored_word in words:
             print(censored_word)
             raise ValidationError(
-                f"{censored_word} Is a bad word, try using good language")
+                f"{censored_word} Is a bad word,Please!! try using good language")
 
 
+# managing the likes
 class PostManager(models.Manager):
     def like_toggle(self, user, post_obj):
         if user in post_obj.liked.all():
@@ -42,13 +46,15 @@ class PostManager(models.Manager):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100,  validators=[
+        validate_comment_text])
     content = models.TextField(max_length=300, validators=[
                                validate_comment_text])
     liked = models.ManyToManyField(
         settings.AUTH_USER_MODEL, blank=True, related_name='liked')
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
     objects = PostManager()
 
     def __str__(self):
@@ -64,7 +70,7 @@ class Comment(models.Model):
         Post, related_name='comments', on_delete=models.CASCADE)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    text = models.TextField()
+    text = models.TextField(max_length=5, validators=[validate_comment_text])
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=True)
 
