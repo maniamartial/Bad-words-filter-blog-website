@@ -50,7 +50,6 @@
   <hr />
 
   <!--Lets liket the post on Image-->
-
   {% if user.is_authenticated %}
   <div class="text-center">
     <a
@@ -67,6 +66,7 @@
     <h6 id="likes_count" style="color: red">{{object.liked.count}}</h6>
   </div>
   {% endif %}
+
   <!-- Comment Form -->
   {% if user.is_authenticated %}
   <div class="card my-4">

@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.views.generic.edit import DeleteView, UpdateView
 from matplotlib.style import context
 from django.contrib import messages
+from django.db.models import Q
 from .models import Post
 from django.contrib.auth.models import User
 # We want to create delete, update views
@@ -14,11 +15,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 #from profanity_filter import ProfanityFilter
-
-
-# Create your views here.
-
-# Act like JSON-python library dictionary
 
 
 def home(request):
@@ -33,9 +29,22 @@ class PostListView(ListView):
     model = Post
     template_name = 'blog/home.html'
     context_object_name = 'posts'
+    # if want to arrange the blogs from older put a minus before the dates
     ordering = ['-date_posted']
     paginate_by = 5
-    # if  want to arrange the blogs from olded put a minus before teh dates
+
+# implementing the search bar
+    def get_queryset(self):
+        try:
+            keyword = self.request.GET['q']
+        except:
+            keyword = ''
+        if (keyword != ''):
+            object_list = self.model.objects.filter(
+                Q(content__icontains=keyword) | Q(title__icontains=keyword))
+        else:
+            object_list = self.model.objects.all()
+        return object_list
 
 
 class UserPostListView(ListView):
@@ -53,11 +62,9 @@ class UserPostListView(ListView):
 class PostDetailedView(DetailView):
     model = Post
 
+
 # Creating a new blog
-
 # We cannot use decoraters with classes
-
-
 class PostCreateView(LoginRequiredMixin,  CreateView):
     model = Post
     fields = ['title', 'content']
@@ -67,6 +74,7 @@ class PostCreateView(LoginRequiredMixin,  CreateView):
         return super().form_valid(form)
 
 
+# if author wants to update the posts
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['title', 'content']
@@ -82,6 +90,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
+# incase the author wants to delete their post
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     success_url = '/'
@@ -92,11 +101,11 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+
 # allow people to comment
-
-
 @login_required
 def add_comment(request, pk):
+    # the comment to be on the specific page opened.
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         user = User.objects.get(id=request.POST.get('user_id'))
@@ -132,14 +141,3 @@ def reportCase(request):
 
     context = {sensitive_words: "sensitive_words"}
     return render(request, "blog/report.html", context)
-
-
-''''@login_required
-@staff_member_required
-def reportCase(request):
-    with open("badwords.txt") as f:
-        sensitive_words = f.readlines()
-
-        # print(sensitive_words)
-    context = {sensitive_words: "sensitive_words"}
-    return render(request, "blog/report.html", context)'''
