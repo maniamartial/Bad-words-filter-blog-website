@@ -5,7 +5,9 @@ import os
 import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+#BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 #SECRET_KEY = 'martialmania19@gmail.com'
 
 # Quick-start development settings - unsuitable for production
@@ -17,7 +19,8 @@ SECRET_KEY = 'django-insecure-f@1gd5*tjl%isi0sxr@+03ib34qtpk*ah73@6@=ehaaefn7%s#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # (os.environ.get('SECRET_KEY'))
 
-ALLOWED_HOSTS = []  # ['djangomaniaapp.herokuapp.com']
+
+ALLOWED_HOSTS = ["https://git.heroku.com/cyberbullyingfilter.git"]
 
 
 # Application definition
@@ -44,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'BlogWebsite.urls'
@@ -72,8 +76,8 @@ WSGI_APPLICATION = 'BlogWebsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3")
     }
 }
 
@@ -118,6 +122,9 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = ' /media/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
