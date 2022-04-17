@@ -1,3 +1,4 @@
+import requests
 from email import message
 from pyexpat.errors import messages
 from .models import Comment
@@ -141,3 +142,9 @@ def reportCase(request):
 
     context = {sensitive_words: "sensitive_words"}
     return render(request, "blog/report.html", context)
+
+
+def index(request):
+    r = requests.get('https://httpbin.org/status/418')
+    print(r.text)
+    return HttpResponse('<pre>' + r.text + '</pre>')
