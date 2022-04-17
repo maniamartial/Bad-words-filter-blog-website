@@ -12,6 +12,7 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('user/<str:username>', UserPostListView.as_view(), name='user-post'),
     path('post/<int:pk>/comment/', views.add_comment, name='add_comment'),
-    path('reportcase/', views.reportCase, name="reportcase")
+    path('reportcase/', views.reportCase, name="reportcase"),
+    path('index', views.index, name="index")
 
 ]
