@@ -19,11 +19,12 @@ CENSORED_WORDS = ['Fuck off', 'Piss off', "fuck", "penisfucker", "porn", "pussy"
                   " illitarate", " prostitute", "gay", " lesbian", "pagan", "evil", "atheist", " foolish", "promiscous", "jackas", "jerk", "dunder", "dick pussy",
                   "motherfucker", "idiot", "rapist", "killer", "murderer", "criminal", "snitch", "smoker", "bad peer", "cocksucker", "tits", "cock", "piss", "cunt",
                   "wank", "bugger", "arse", "hole", "head", "crap", "bloody arsehole", "asshole", "bullshit",
-                  "balls", "bastard", "dickhead", " fanny", "knob",
+                  "balls", "bastard", "dickhead", " fanny", "knob", "spangwingwi",
                   "twat", "snatch", "bomboclat", "bloodcaat", "prick", "clit"]
 
 
 def validate_comment_text(text):
+    text = text.lower()
     words = set(re.sub("[^\w]", " ",  text).split())
     for censored_word in CENSORED_WORDS:
       # if any(str(censored_word in words)):
