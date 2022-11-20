@@ -7,7 +7,8 @@ The user have teh mandate to create accounts and post their stories whith positi
 
 The backend developerd by pure django (Python)
 Database - sqlite
-Frontend - vanilla javascript, HTML< CSS
+Frontend - vanilla javascript, HTML, CSS, Bootsrap
+Backend - Django
 
 #AUTHENTICATION
 
